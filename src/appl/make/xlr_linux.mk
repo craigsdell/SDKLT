@@ -102,7 +102,10 @@
 # Too chain directories
 TOOLCHAIN_BIN_DIR = $(TOOLCHAIN_DIR)/bin
 LIBRARY_PATH = $(TOOLCHAIN_DIR)/lib:$(TOOLCHAIN_DIR)/lib64
-TARGET_ARCHITECTURE = x86_64-fedora-linux-gnu
+# Use following for fedora build
+#TARGET_ARCHITECTURE = x86_64-fedora-linux-gnu
+# Use following for debian build
+TARGET_ARCHITECTURE = x86_64-linux-gnu
 
 # Add tools to system PATH
 TOOL_PATH := $(TOOLCHAIN_BIN_DIR):$(TOOL_PATH)
