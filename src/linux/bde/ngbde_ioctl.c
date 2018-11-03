@@ -89,6 +89,7 @@
  *    THE POSSIBILITY OF SUCH DAMAGES.
  */
 
+#include <linux/uaccess.h>
 #include <lkm/ngbde_ioctl.h>
 
 #include <ngbde.h>
