@@ -132,7 +132,7 @@
 #include <linux/errno.h>
 #include <linux/unistd.h>
 #include <asm/io.h>
-#include <asm/uaccess.h>
+#include <linux/uaccess.h>
 #include <linux/module.h>
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
@@ -927,7 +927,13 @@ ngknet_enet_open(struct net_device *ndev)
     }
 
     /* Prevent tx timeout */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,6,0)
     ndev->trans_start = jiffies;
+#else
+    struct netdev_queue *txq = netdev_get_tx_queue(ndev, 0);
+    if (txq->trans_start != jiffies)
+        txq->trans_start = jiffies;
+#endif
 
     netif_tx_wake_all_queues(ndev);
 
