@@ -252,6 +252,8 @@ format_prefix(char *buf, int max, const char *prefix_format,
         case 'f':
             str = "<nofile>";
             if (meta->file != NULL) {
+                /* Check to make sure we don't go past the end of the str */
+                if (path_offset >= strlen(meta->file)) path_offset = 0;
                 str = &meta->file[path_offset];
             }
             len += add_string(&buf[len], max-len, str);
